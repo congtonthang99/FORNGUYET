@@ -1,26 +1,21 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { Heart } from "lucide-react";
 
 export default function LoveMessage() {
   const [stage, setStage] = useState(0);
 
-  useEffect(() => {
-    if (stage > 0) {
-      const audio = new Audio("/music.mp3");
-      audio.play();
-    }
-  }, [stage]);
-
   const handleClick = () => {
     setStage(stage + 1);
   };
 
   return (
-    <div
-      className="flex items-center justify-center min-h-screen bg-gray-900 text-white"
-      onClick={stage === 0 ? handleClick : undefined}
-    >
+    <div className="flex items-center justify-center min-h-screen bg-gray-900 text-white">
+      {stage === 0 && (
+        <p className="text-lg cursor-pointer" onClick={handleClick}>
+          Em có một món quà, hãy nhấn vào để nhận nó.
+        </p>
+      )}
       {stage > 0 && (
         <motion.div
           initial={{ scale: 0 }}
