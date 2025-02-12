@@ -1,0 +1,53 @@
+import { useState, useEffect } from "react";
+import { motion } from "framer-motion";
+import { Heart } from "lucide-react";
+
+export default function LoveMessage() {
+  const [stage, setStage] = useState(0);
+
+  useEffect(() => {
+    if (stage > 0) {
+      const audio = new Audio("C:/Users/Admin/Downloads/Westlife_-_My_Love.mp3");
+      audio.play();
+    }
+  }, [stage]);
+
+  const handleClick = () => {
+    setStage(stage + 1);
+  };
+
+  return (
+    <div className="flex items-center justify-center min-h-screen bg-gray-900 text-white">
+      {stage === 0 && (
+        <p className="text-lg cursor-pointer" onClick={handleClick}>
+          Em có một món quà, hãy nhấn vào để nhận nó
+        </p>
+      )}
+
+      {stage > 0 && (
+        <motion.div
+          initial={{ scale: 0 }}
+          animate={{ scale: 1.2 }}
+          transition={{ duration: 0.5 }}
+          className="flex flex-col items-center"
+        >
+          {stage === 1 ? (
+            <div className="text-center">
+              <motion.div
+                animate={{ scale: [1, 1.5, 1] }}
+                transition={{ duration: 0.8, repeat: Infinity }}
+              >
+                <Heart size={100} className="text-red-500 cursor-pointer" onClick={handleClick} />
+              </motion.div>
+              <p className="mt-4 text-lg">
+                Chào em, em có phải tên là Nguyệt không? <br /> Nếu là Nguyệt hãy chạm tiếp vào trái tim.
+              </p>
+            </div>
+          ) : (
+            <div className="text-center text-6xl">🖕</div>
+          )}
+        </motion.div>
+      )}
+    </div>
+  );
+}
