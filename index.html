@@ -1,21 +1,21 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Heart } from "lucide-react";
 
 export default function LoveMessage() {
   const [stage, setStage] = useState(0);
 
   const handleClick = () => {
-    setStage(stage + 1);
+    setStage((prev) => prev + 1);
   };
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-900 text-white">
       {stage === 0 && (
         <p className="text-lg cursor-pointer" onClick={handleClick}>
-          Em có một món quà, hãy nhấn vào để nhận nó.
+          Em có một món quà, hãy nhấn vào để nhận nó
         </p>
       )}
+
       {stage > 0 && (
         <motion.div
           initial={{ scale: 0 }}
@@ -29,14 +29,14 @@ export default function LoveMessage() {
                 animate={{ scale: [1, 1.5, 1] }}
                 transition={{ duration: 0.8, repeat: Infinity }}
               >
-                <Heart size={100} className="text-red-500 cursor-pointer" onClick={handleClick} />
+                <p className="text-6xl cursor-pointer" onClick={handleClick}>❤️</p>
               </motion.div>
               <p className="mt-4 text-lg">
-                Chào em, em có phải tên là Nguyệt không? <br /> Nếu là Nguyệt hãy chạm tiếp vào trái tim.
+                Chào em, em có phải tên là Nguyệt không? <br /> Nếu là Nguyệt hãy chạm tiếp vào bàn tay.
               </p>
             </div>
           ) : (
-            <div className="text-center text-6xl">🖕</div>
+            <div className="text-center text-6xl">💩</div>
           )}
         </motion.div>
       )}
